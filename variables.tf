@@ -3,11 +3,13 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-# ubuntu-trusty-14.04 (x64)
+# Latest Amazon Linux 2 AMI (HVM), SSD
 variable "aws_amis" {
   default = {
-    "us-east-1" = "ami-5f709f34"
-    "us-west-2" = "ami-7f675e4f"
+    "us-east-1" = "ami-02354e95b39ca8dec"
+    "us-east-2" = "ami-07c8bc5c1ce9598c3"
+    "us-west-1" = "ami-05655c267c89566dd"
+    "us-west-2" = "ami-05655c267c89566dd"
   }
 }
 
@@ -32,10 +34,10 @@ variable "asg_min" {
 
 variable "asg_max" {
   description = "Max numbers of servers in ASG"
-  default     = "2"
+  default     = "5"
 }
 
 variable "asg_desired" {
   description = "Desired numbers of servers in ASG"
-  default     = "1"
+  default     = "2"
 }

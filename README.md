@@ -1,35 +1,21 @@
-# ASG example
+# terraform-lamp stack
+This is an example of a highly available web server made by launching 2 auto scaling groups of ec2's all zones in a region.  The payload in the ec2's is a LAMP Stack (Linux, Apache, MySQL, PHP).  
 
-This example shows how to launch instances using Auto Scaling Groups.
+This solution was created a a proof of concept for a prospective employer.  It demostrates implementation of all of the following technologies:
+Terraform for AWS
+AWS: Elastic Load Balancers, Auto Scaling Groups, automatically deployed E2's, a basic launch configuration, and appropriate security groups.
+i
+## Background
 
-This creates a security group, launch configuration, auto scaling group and an ELB. The user data for launch configuration installs nginx and it listens on port 80.
+For terraform I forked HashiCorp's cookbook for auto scaling groups:
+https://github.com/terraform-providers/terraform-provider-aws/tree/master/examples/asg
 
-The example uses latest Ubuntu AMIs.
+For LAMP layout I followed AWS's suggested best practice: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html
 
-Make sure you change the list of availability zones that is applicable to your account and region.
+## Potential extensions
 
-To run, configure your AWS provider as described in https://www.terraform.io/docs/providers/aws/index.html
+This example's purpose was to create a LAMP stack.  For improving HA/Scalability, a next step would be to separate the database into an RDS.  Read replicas could be scaled or made available across-region. 
 
-Running the example
+Additionally, the stack could be deployed in multiple regions, behind Route 53. 
 
-For planning phase 
-
-```
-terraform plan -var 'key_name={your_key_name}'
-```
-
-For apply phase
-
-```
-terraform apply -var 'key_name={your_key_name}'
-```
-
-Alternatively to using `-var` with each command, the `terraform.template.tfvars` file can be copied to `terraform.tfvars` and updated.
-
-Once the stack is created, wait for few minutes and test the stack by launching a browser with ELB url.
-
-To remove the stack
-
-```
- terraform destroy -var 'key_name={your_key_name}'
-```
+Additionally, rather than serve solely on port 80, this template should add SSL/TLS before production.  A procedure for doing so is described here: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-2.html

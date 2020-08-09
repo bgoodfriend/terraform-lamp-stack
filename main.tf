@@ -11,7 +11,7 @@ locals {
 }
 
 resource "aws_elb" "web-elb" {
-  name = "terraform-example-elb"
+  name = "lamp-elb"
 
   # The same availability zone as our instances
   availability_zones = local.availability_zones
@@ -34,7 +34,7 @@ resource "aws_elb" "web-elb" {
 
 resource "aws_autoscaling_group" "web-asg" {
   availability_zones   = local.availability_zones
-  name                 = "terraform-example-asg"
+  name                 = "lamp-asg"
   max_size             = var.asg_max
   min_size             = var.asg_min
   desired_capacity     = var.asg_desired
@@ -51,7 +51,7 @@ resource "aws_autoscaling_group" "web-asg" {
 }
 
 resource "aws_launch_configuration" "web-lc" {
-  name          = "terraform-example-lc"
+  name          = "lamp-lc"
   image_id      = var.aws_amis[var.aws_region]
   instance_type = var.instance_type
 
@@ -64,8 +64,8 @@ resource "aws_launch_configuration" "web-lc" {
 # Our default security group to access
 # the instances over SSH and HTTP
 resource "aws_security_group" "default" {
-  name        = "terraform_example_sg"
-  description = "Used in the terraform"
+  name        = "lamp_sg"
+  description = "Terraform created LAMP SG"
 
   # SSH access from anywhere
   ingress {
