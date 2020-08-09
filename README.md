@@ -4,7 +4,21 @@ This is an example of a highly available web server made by launching 2 auto sca
 This solution was created a a proof of concept for a prospective employer.  It demostrates implementation of all of the following technologies:
 Terraform for AWS
 AWS: Elastic Load Balancers, Auto Scaling Groups, automatically deployed E2's, a basic launch configuration, and appropriate security groups.
-i
+
+## How to use this.
+1. Install Terraform. 
+   https://learn.hashicorp.com/tutorials/terraform/install-cli
+
+2. Configure variables.tf file as needed.
+
+3. Consider changing root password for embedded MariaDB.  Edit userdata.sh
+
+4. terraform init
+
+5. terraform plan
+
+6. terraform apply
+
 ## Background
 
 For terraform I forked HashiCorp's cookbook for auto scaling groups:
