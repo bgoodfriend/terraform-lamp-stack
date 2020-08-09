@@ -1,5 +1,5 @@
 # terraform-lamp-stack
-This is an example of a highly available web server made by launching 2 auto scaling groups of ec2's all zones in a region.  The payload in the ec2's is a LAMP Stack.
+This is an example of a highly available web server made by launching an auto scaling group of ec2's all zones in a region.  The payload in the ec2's is a LAMP Stack.
 
 This solution was created a a proof of concept for a prospective employer.  It demostrates implementation of all of the following technologies:
 - Terraform for AWS
