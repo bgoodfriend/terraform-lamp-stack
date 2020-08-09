@@ -1,11 +1,16 @@
-# terraform-lamp stack
-This is an example of a highly available web server made by launching 2 auto scaling groups of ec2's all zones in a region.  The payload in the ec2's is a LAMP Stack (Linux, Apache, MySQL, PHP).  
+# terraform-lamp-stack
+This is an example of a highly available web server made by launching 2 auto scaling groups of ec2's all zones in a region.  The payload in the ec2's is a LAMP Stack.
 
 This solution was created a a proof of concept for a prospective employer.  It demostrates implementation of all of the following technologies:
-Terraform for AWS
-AWS: Elastic Load Balancers, Auto Scaling Groups, automatically deployed E2's, a basic launch configuration, and appropriate security groups.
+- Terraform for AWS
+- AWS: Elastic Load Balancers, Auto Scaling Groups, automatically deployed E2's, a basic launch configuration, and appropriate security groups.
+- LAMP:
+  - Linux: Latest Amazon Linux 2 AMI (HVM), SSD Volume Type
+  - Apache
+  - Mysql: MariaDB
+  - PHP
 
-## How to use this.
+## Deployment Procedure
 1. Install Terraform. 
    https://learn.hashicorp.com/tutorials/terraform/install-cli
 
@@ -19,6 +24,13 @@ AWS: Elastic Load Balancers, Auto Scaling Groups, automatically deployed E2's, a
 
 6. terraform apply
 
+It may take several minutes after launch for AWS to initialize all portions.  After that, your site should be available at your LB's URL, which will be printed in terraform's outputs.  Examples
+
+http://{your elb url}/
+http://{your elb url}/phpinfo.php
+
+Fun example this is working: Both of these pages display the ip of the application system.  If you kept the default and deployed 2 LAMP stacks, you can "flip a coin" by reloading each page and watching the IP change.
+
 ## Background
 
 For terraform I forked HashiCorp's cookbook for auto scaling groups:
@@ -28,7 +40,7 @@ For LAMP layout I followed AWS's suggested best practice: https://docs.aws.amazo
 
 ## Potential extensions
 
-This example's purpose was to create a LAMP stack.  For improving HA/Scalability, a next step would be to separate the database into an RDS.  Read replicas could be scaled or made available across-region. 
+This example's purpose was to create a LAMP stack.  For improving HA/Scalability, a next step would be to separate the database into an RDS.  Read replicas could be scaled or made available across-region.  Seaparating the database would open this stack to other scaling technologies, eg CloudFront.
 
 Additionally, the stack could be deployed in multiple regions, behind Route 53. 
 
